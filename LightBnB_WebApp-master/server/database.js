@@ -99,9 +99,11 @@ const getAllReservations = function(guest_id, limit = 10) {
   .query(`
   SELECT *
   FROM reservations
+  JOIN property_reviews ON properties.id = property_id
   WHERE guest_id = $1`, [guest_id])
   .then((result) => {
-    console.log(guest_id);
+    console.log(result);
+    return result.rows;
   })
   .catch((err) => {
     console.log(err.message);
